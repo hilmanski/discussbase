@@ -11,47 +11,44 @@ export default function Form({slug}) {
 
     const user_session = supabase.auth.session()
 
-    useEffect(() => {
-        checkAuthUser()
+    useEffect(() => { 
+        (async () => {
+            //Redirect if not logged In
+            if (user_session == null) {
+                window.location.href = '/'
+            }
 
+            const profileExists = await isProfileExists()
+            if (!profileExists) {
+                alert('Create username first')
+                window.location.href = '/'
+            }
+        })();
+    }, [user_session])
+
+    useEffect(() => {
         //Edit Mode
         if(slug != undefined) {
-            getPost()
-        }
-    }, [])
+            (async () => {
+                const { data: post, error } = await supabase
+                    .from('posts')
+                    .select('*')
+                    .eq('slug', slug)
+                    .single()
 
-    async function checkAuthUser() {
-        //Redirect if not logged In
-        if (user_session == null) {
-            window.location.href = '/'
-        }
+                if (error) {
+                    throw error
+                }
 
-        const profileExists = await isProfileExists()
-        if (!profileExists) {
-            alert('Create username first')
-            window.location.href = '/'
+                if (post) {
+                    setPost(post)
+                    setValue('title', post.title)
+                    setValue('body', post.body)
+                    setValue('tag', post.tag)
+                }
+            })();
         }
-    }
-
-    async function getPost() {
-        const { data: post, error } = await supabase
-            .from('posts')
-            .select('*')
-            .eq('slug', slug)
-            .single()
-        
-        if (error) {
-            throw error
-        }
-
-        if (post) {
-            setPost(post)
-            setValue('title', post.title)
-            setValue('body', post.body)
-            setValue('tag', post.tag)
-        }
-        
-    }
+    }, [slug, setValue])
 
     const onSubmit = handleSubmit(async (formData) => {
         let method = 'POST'

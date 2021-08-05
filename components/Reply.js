@@ -18,7 +18,7 @@ export default function Reply({post_id, replies}) {
     useEffect(() => {
         checkAuthUser()
         setReplyList(replies)
-    }, [])
+    }, [replies])
 
     async function checkAuthUser() {
         const profileExists = await isProfileExists()

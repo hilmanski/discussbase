@@ -18,7 +18,7 @@ export default function Post({post}) {
                 setOwner(true)
             }
         }
-    }, [])
+    }, [user_session, post.owner.id])
 
     async function confirmDelete(e) {
         e.preventDefault();

@@ -21,7 +21,7 @@ const createReply = async(req, res) => {
         if(!error) {
             const { data: user, error } = await supabase
                                       .from('profiles')
-                                      .select('id, username')
+                                      .select('id, username, avatar_url')
                                       .eq('id', user_id)
                                       .single()
 

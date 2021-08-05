@@ -65,9 +65,10 @@ export default function PostList({ posts, totalPosts, tag = null }) {
                                 </div>
 
                                 <div className=''>
-                                    <Link href={'/posts/' + post.slug}>
-                                        <p> <a className='has-text-dark is-size-4'> {capitalize(post.title)} </a> </p>
+                                    <p> <Link href={'/posts/' + post.slug}>
+                                        <a className='has-text-dark is-size-4'> {capitalize(post.title)} </a>
                                     </Link>
+                                    </p>
                                     <p> <small>
                                     <Link href={'/user/' + post.owner.username}> 
                                         <a className='has-text-dark'>@{post.owner.username} </a>

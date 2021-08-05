@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
 import { supabase } from '../utils/supabaseClient'
-import Gravatar from 'react-gravatar'
 import Avatar from './Avatar'
 
 export default function AvatarForm({ username, avatar_url, onUpload }) {

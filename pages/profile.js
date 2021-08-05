@@ -98,7 +98,7 @@ export default function Profile() {
             {error &&
                 <div className='notification'>
                     <h3><b> Oops </b></h3>
-                    Looks like you don't have any profile yet. Add your username
+                    Looks like you don&apos;t have any profile yet. Add your username
                 </div>
             }
 

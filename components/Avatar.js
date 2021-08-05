@@ -1,5 +1,7 @@
+import Image from 'next/image'
 import { useState, useEffect } from 'react'
 import { supabase } from '../utils/supabaseClient'
+
 
 export default function Avatar({username, avatar_url, size=64}) {
     const [avatarUrl, setAvatarUrl] = useState(null)
@@ -17,18 +19,25 @@ export default function Avatar({username, avatar_url, size=64}) {
                 throw error
             }
             const url = URL.createObjectURL(data)
+            console.log(url)
             setAvatarUrl(url)
         } catch (error) {
             console.log('Error downloading image: ', error.message)
         }
     }
 
+    const customImgLoader = ({ src, width }) => {
+        return `${src}`
+    }
+
     return (
         <>
         <figure className={`image is-${size}x${size}`}>
-            <img className='is-rounded' alt="Avatar"
-                src={avatarUrl ? avatarUrl : 'https://ui-avatars.com/api/?name=' + username}
-            />
+            { avatarUrl
+                ? <Image loader={customImgLoader} className='is-rounded' alt="Avatar" width={size} height={size} src={avatarUrl} />
+                : <Image className='is-rounded' alt="Avatar" width={size} height={size} 
+                            src={'https://ui-avatars.com/api/?name='+username} />
+            }
         </figure>
         </>
     )

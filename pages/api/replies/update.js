@@ -1,7 +1,7 @@
 import { supabase } from '../../../utils/supabaseClient'
 import jwt_decode from "jwt-decode";
 
-export default async(req, res) => {
+const updateReply = async(req, res) => {
     const { body, reply_id, access_token } = req.body;
 
     const decoded = jwt_decode(access_token);
@@ -22,3 +22,5 @@ export default async(req, res) => {
         res.status(500).json({ error: e.message });
     }
 }
+
+export default updateReply

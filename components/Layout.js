@@ -17,9 +17,11 @@ export default function Layout({ children }) {
         <nav className="navbar has-background-light mb-5 py-3" role="navigation" aria-label="main navigation">
             <div className="container is-max-desktop">
                 <div className="navbar-brand">
-                    <a className="navbar-item" href="/">
+                    <Link href="/">
+                    <a className="navbar-item">
                         <h1>Discuss OS supabase</h1>
                     </a>
+                    </Link>
 
                         <a
                             onClick={() => {
@@ -52,7 +54,7 @@ export default function Layout({ children }) {
                             <Link href='/profile'><a className="navbar-item"> Profile </a></Link>
                             <a className="navbar-item" onClick={() => supabase.auth.signOut()}> Log Out </a>
                           </>
-                        : <a href='/' className={'navbar-item'}>Login</a>
+                        : <Link href='/'><a className={'navbar-item'}>Login</a></Link>
                     }
                 </div>
             </div>

@@ -1,6 +1,6 @@
 import { supabase } from '../../../utils/supabaseClient'
 
-export default async (req, res) => {
+const deleteReply = async (req, res) => {
     const { access_token, reply_id } = req.body;
     
     try {
@@ -15,3 +15,5 @@ export default async (req, res) => {
         res.status(500).json({ error: e.message });
     }
 }
+
+export default deleteReply

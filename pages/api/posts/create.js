@@ -2,7 +2,7 @@ import { supabase } from '../../../utils/supabaseClient'
 import jwt_decode from "jwt-decode";
 const slugify = require('slugify')
 
-export default async(req, res) => {
+const post = async (req, res) => {
     const { title, body, tag, access_token } = req.body;
 
     const decoded = jwt_decode(access_token);
@@ -27,3 +27,5 @@ export default async(req, res) => {
         res.status(500).json({ error: e.message });
     }
 }
+
+export default post

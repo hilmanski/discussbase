@@ -1,6 +1,6 @@
 import { supabase } from '../../../utils/supabaseClient'
 
-export default async(req, res) => {
+const updatePost = async(req, res) => {
     const { title, body, tag, access_token, slug } = req.body;
     
     try {
@@ -19,3 +19,5 @@ export default async(req, res) => {
         res.status(500).json({ error: e.message });
     }
 }
+
+export default updatePost

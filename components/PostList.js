@@ -49,11 +49,11 @@ export default function PostList({ posts, totalPosts, tag = null }) {
 
                     <div className="column">
 
-                        <form class='columns is-mobile' action='/posts/search' method ='GET'>
-                            <div class='column'>
+                        <form className='columns is-mobile' action='/posts/search' method ='GET'>
+                            <div className='column'>
                                 <input className='input is-small' placeholder='type keyword..' type='search' name='query'/>
                             </div>
-                            <div class='column is-2'>
+                            <div className='column is-2'>
                                 <button className='button is-fullwidth is-small'>Search</button>
                             </div>
                         </form>
@@ -84,7 +84,7 @@ export default function PostList({ posts, totalPosts, tag = null }) {
                             <ul className="pagination-list">
                                 {
                                     Array(totalPage).fill(null).map((value, index) => (
-                                        <li>
+                                        <li key={index}>
                                             <Link href={pathName + '?page=' + (index+1)}>
                                                 <a className="pagination-link"> {index+1} </a>
                                             </Link>

@@ -39,8 +39,8 @@ export default function PostList({ posts, totalPosts, tag = null }) {
                             <a className="is-block py-1">All</a>
                         </Link>
                         {categories.map((cat, index) => (
-                            <Link href={'/posts/tag/'+ cat.key}>
-                                <a key={index} className="is-block py-1">{cat.name}</a>
+                            <Link key={index} href={'/posts/tag/'+ cat.key}>
+                                <a className="is-block py-1">{cat.name}</a>
                             </Link>
                         ))}
                     </div>

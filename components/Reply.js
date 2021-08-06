@@ -25,7 +25,11 @@ export default function Reply({post_id, replies}) {
     async function checkAuthUser() {
         const profileExists = await isProfileExists()
         if (!profileExists) {
-            setBlockMsg('Login and create username first to join converstion')
+            setBlockMsg('Create username first to join conversation')
+        }
+
+        if (user_session == null) {
+            setBlockMsg('Login to join conversation')
         }
     }
 

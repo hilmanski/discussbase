@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import isProfileExists from '../utils/isProfileExists';
 import { supabase } from '../utils/supabaseClient';
-import Layout from './layout';
+import Layout from './Layout';
 
 export default function Form({slug}) {
     const [post, setPost] = useState(null)

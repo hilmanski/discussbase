@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import Layout from '../components/layout';
+import Layout from '../components/Layout';
 import Link from 'next/link';
 import Head from 'next/head'
 import TimeAgo from 'react-timeago'

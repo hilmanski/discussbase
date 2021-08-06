@@ -1,5 +1,5 @@
 import { supabase } from '../../utils/supabaseClient'
-import Layout from '../../components/layout';
+import Layout from '../../components/Layout';
 import Link from 'next/link';
 import Avatar from '../../components/Avatar';
 

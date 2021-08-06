@@ -5,6 +5,8 @@ import TimeAgo from 'react-timeago'
 import isProfileExists from '../utils/isProfileExists';
 import Avatar from './Avatar';
 import Link from 'next/link';
+import ReactMarkdown from 'react-markdown'
+import marked from 'marked';
 
 export default function Reply({post_id, replies}) {
     const [blockMsg, setBlockMsg] = useState('')
@@ -26,6 +28,7 @@ export default function Reply({post_id, replies}) {
             setBlockMsg('Login and create username first to join converstion')
         }
     }
+
 
     const onSubmit = handleSubmit(async (formData) => {
         let method = 'POST'
@@ -50,8 +53,8 @@ export default function Reply({post_id, replies}) {
         }).then(response => response.json())
             .then((data) => {
                 if(editMode == true){
-                    document.querySelector(`.reply_text[data-id='${selectedReply}']`).innerText = data.reply.body
                     setEditMode(false)
+                    document.querySelector(`.reply_text[data-id='${selectedReply}']`).innerHTML = marked(data.reply.body)
                 } 
                 else {
                     const newReply = {
@@ -80,12 +83,22 @@ export default function Reply({post_id, replies}) {
 
         const reply_id = e.currentTarget.getAttribute("data-edit")
         const replyTextarea = document.getElementsByTagName('textarea')[0]
-        const targetText = document.querySelector(`.reply_text[data-id='${reply_id}']`)
+
+        let { data, error } = await supabase
+            .from('replies')
+            .select('*')
+            .eq('id', reply_id)
+            .single()
+        
+        if(error) {
+            alert("sorry.. something is wrong.")
+            return
+        }
+        
         replyTextarea.focus()
-        replyTextarea.value = targetText.innerText
+        replyTextarea.value = data.body
         setSelectedReply(reply_id)
         setEditMode(true)
-        console.log(setSelectedReply)
     }
 
     async function confirmDelete(e) {
@@ -163,8 +176,10 @@ export default function Reply({post_id, replies}) {
                                 <Avatar username={reply.commenter.username} avatar_url={reply.commenter.avatar_url} size='48' />
                             </div>
                             <div className='column'>
-                                <p className='reply_text' data-id={reply.id}>{reply.body} </p>
-                            <small><Link href={'/user/' + reply.commenter.username}><a className='has-text-dark'>@{reply.commenter.username} </a></Link> 
+                                <p className='reply_text' data-id={reply.id}>
+                                <ReactMarkdown>{reply.body}</ReactMarkdown>
+                                </p>
+                            <small className='has-text-grey'><Link href={'/user/' + reply.commenter.username}><a className='has-text-grey'>@{reply.commenter.username} </a></Link>
                              replied <TimeAgo date={reply.created_at} /> </small>
 
                                 {commentOwner &&

@@ -69,9 +69,9 @@ export default function PostList({ posts, totalPosts, tag = null }) {
                                         <a className='has-text-dark is-size-4'> {capitalize(post.title)} </a>
                                     </Link>
                                     </p>
-                                    <p> <small>
+                                    <p> <small className='has-text-grey'>
                                     <Link href={'/user/' + post.owner.username}> 
-                                        <a className='has-text-dark'>@{post.owner.username} </a>
+                                            <a className='has-text-grey'>@{post.owner.username} </a>
                                     </Link>
                                     posted <TimeAgo date={post.created_at} />
                                     | {post.replies.length} comments

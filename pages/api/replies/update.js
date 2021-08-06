@@ -7,7 +7,6 @@ const updateReply = async(req, res) => {
     const decoded = jwt_decode(access_token);
     const user_id = decoded.sub
 
-    console.log(reply_id)
     try {
         supabase.auth.setAuth(access_token)
         const { data, error } =  await supabase

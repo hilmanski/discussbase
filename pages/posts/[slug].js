@@ -7,6 +7,7 @@ import Reply from '../../components/Reply';
 import TimeAgo from 'react-timeago'
 import capitalize from '../../utils/capitalize';
 import Avatar from '../../components/Avatar';
+import ReactMarkdown from 'react-markdown'
 
 export default function Post({post}) {
     const [owner, setOwner] = useState(false)
@@ -74,7 +75,7 @@ export default function Post({post}) {
             <div className="column is-four-fifths">
                 <h1 className='is-size-3 mb-2'>{capitalize(post.title)}</h1>
                 <div className='mb-4'>
-                    {post.body}
+                    <ReactMarkdown>{post.body}</ReactMarkdown>
                 </div>
 
                 <Reply post_id={post.id} replies={post.replies} />

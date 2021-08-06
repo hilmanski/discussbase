@@ -23,10 +23,10 @@ export default function Home() {
         {!session && <Auth />}
         <br/>
 
-        <h1 className='is-size-2'>Open Source forum</h1>
+        <h1 className='is-size-2 is-size-4-mobile'>Open Source forum</h1>
         <h2 className='is-size-4 mb-5'>
-          Create your discussion platform completely free, <br/>
-          Using SEVEN stack (Supabase, Vercel and Next.js). <br/>
+          Create your discussion platform completely free,
+          Using SEVEN stack (Supabase, Vercel and Next.js).
           Source code <Link href='https://github.com/hilmanski/discussbase'><a>available here</a></Link>.
           Read the doc <Link href='https://docs-discussbase.vercel.app/'><a>here</a></Link>
         </h2>

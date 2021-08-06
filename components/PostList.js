@@ -53,7 +53,7 @@ export default function PostList({ posts, totalPosts, tag = null }) {
                             <div className='column'>
                                 <input className='input is-small' placeholder='type keyword..' type='search' name='query'/>
                             </div>
-                            <div className='column is-2'>
+                            <div className='column is-3'>
                                 <button className='button is-fullwidth is-small'>Search</button>
                             </div>
                         </form>
@@ -66,7 +66,7 @@ export default function PostList({ posts, totalPosts, tag = null }) {
 
                                 <div className=''>
                                     <p> <Link href={'/posts/' + post.slug}>
-                                        <a className='has-text-dark is-size-4'> {capitalize(post.title)} </a>
+                                        <a className='has-text-dark is-size-4 is-size-5-mobile'> {capitalize(post.title)} </a>
                                     </Link>
                                     </p>
                                     <p> <small className='has-text-grey'>

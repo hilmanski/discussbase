@@ -57,11 +57,14 @@ export default function Post({post}) {
             <div className="columns">
             
             <div className="column">
-                <Avatar username={post.owner.username} avatar_url={post.owner.avatar_url} />
-                    <p> <Link href={'/user/' + post.owner.username}><a className='has-text-dark'>@{post.owner.username} </a></Link> 
+                <div className="is-flex-mobile">
+                <Avatar username={post.owner.username} avatar_url={post.owner.avatar_url} size="48"/>
+                <div>
+                <p> <Link href={'/user/' + post.owner.username}><a className='has-text-dark'>@{post.owner.username} </a></Link> 
                       posted <TimeAgo date={post.created_at} /></p>
-                <p> <Link href={'/posts/tag/' + post.tag}> 
-                    <a className='tag is-link is-light'> {post.tag} </a></Link></p>
+                <p> <Link href={'/posts/tag/' + post.tag}><a className='tag is-link is-light'>{post.tag}</a></Link></p>
+                </div>
+                </div>
 
                 {owner &&
                     <div className='mt-2'>

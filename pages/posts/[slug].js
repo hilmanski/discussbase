@@ -103,7 +103,10 @@ export async function getServerSideProps(context) {
                     )
                 `)
         .eq('slug', context.params.slug)
+        .order('created_at', { ascending: true, foreignTable: 'replies' })
         .single()
+
+        console.log(post)
     
     if (!post) {
         return {

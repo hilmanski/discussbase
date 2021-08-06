@@ -167,7 +167,7 @@ export default function Reply({post_id, replies}) {
                             <button type="submit" className="button is-primary"> Update </button> &nbsp;
                             <button onClick={cancelEditMode} className="button has-background-danger has-text-white"> Cancel </button>
                         </>
-                        : <button type="submit" className="button is-primary is-fullwidth"> Post </button>
+                        : <button type="submit" className="button is-primary is-fullwidth"> Reply </button>
                     }
                 </form>
             }

@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
+import getCategories from '../utils/getCategories';
 import isProfileExists from '../utils/isProfileExists';
 import { supabase } from '../utils/supabaseClient';
 import Layout from './Layout';
@@ -8,7 +9,7 @@ import Layout from './Layout';
 export default function Form({slug}) {
     const [post, setPost] = useState(null)
     const { handleSubmit, register, setValue, formState: { errors } } = useForm();
-
+    const categories = getCategories()
     const user_session = supabase.auth.session()
 
     useEffect(() => { 
@@ -125,9 +126,9 @@ export default function Form({slug}) {
                     <label className='label'>Category</label>
                     <div className='select'>
                     <select {...register("tag", { required: 'Subject is required'})}>
-                        <option value="help">help</option>
-                        <option value="share">share</option>
-                        <option value="interview">interview</option>
+                        {categories.map((cat, index) => (
+                            <option key={index} value={cat.key}>{cat.name} - {cat.desc} </option>
+                        ))}
                     </select>
                     </div>
                     {errors.tag && (

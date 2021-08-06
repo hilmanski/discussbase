@@ -5,12 +5,14 @@ import Head from 'next/head'
 import TimeAgo from 'react-timeago'
 import capitalize from '../utils/capitalize';
 import Avatar from './Avatar';
+import getCategories from '../utils/getCategories';
 
 export default function PostList({ posts, totalPosts, tag = null }) {
     const [pathName, setPathName] = useState(null)
     const perPage = 15   
     const totalPage = Math.ceil(totalPosts/perPage)
-
+    const categories = getCategories()
+    
     useEffect(() => {
         // component is mounted and window is available
         setPathName(window.location.pathname)
@@ -36,15 +38,11 @@ export default function PostList({ posts, totalPosts, tag = null }) {
                         <Link href='/posts'>
                             <a className="is-block py-1">All</a>
                         </Link>
-                        <Link href='/posts/tag/help'>
-                            <a className="is-block py-1">Help</a>
-                        </Link>
-                        <Link href='/posts/tag/share'>
-                            <a className="is-block py-1">Share</a>
-                        </Link>
-                        <Link href='/posts/tag/intervew'>
-                            <a className="is-block py-1">Interview</a>
-                        </Link>
+                        {categories.map((cat, index) => (
+                            <Link href={'/posts/tag/'+ cat.key}>
+                                <a key={index} className="is-block py-1">{cat.name}</a>
+                            </Link>
+                        ))}
                     </div>
 
                     <div className="column">
@@ -101,3 +99,4 @@ export default function PostList({ posts, totalPosts, tag = null }) {
         </Layout>
     )
 }
+

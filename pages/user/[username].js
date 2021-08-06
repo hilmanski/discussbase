@@ -6,11 +6,15 @@ import Avatar from '../../components/Avatar';
 export default function PostByTag({ user }) {
     return (
         <Layout>
-            <Avatar username={user.username} avatar_url={user.avatar_url}></Avatar>
-            <p>@{user.username}</p>
-            {user.website &&
-                <p> <Link href={user.website}><a>{user.website}</a></Link> </p>
-            }
+            <div class="columns is-mobile">
+                <div class="column is-half is-offset-one-quarter">
+                    <Avatar username={user.username} avatar_url={user.avatar_url}></Avatar>
+                    <p>@{user.username}</p>
+                    {user.website &&
+                        <p> <Link href={user.website}><a>{user.website}</a></Link> </p>
+                    }
+                </div>
+            </div>
         </Layout>
     )
 }

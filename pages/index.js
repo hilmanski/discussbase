@@ -27,7 +27,8 @@ export default function Home() {
         <h2 className='is-size-4 mb-5'>
           Create your discussion platform completely free, <br/>
           Using SEVEN stack (Supabase, Vercel and Next.js). 
-          Source code <Link href='https://github.com/hilmanski/discussbase'><a>available here</a></Link>
+          Source code <Link href='https://github.com/hilmanski/discussbase'><a>available here</a></Link>.
+          Docs coming soon!
         </h2>
 
         <div className='columns mt-2'>

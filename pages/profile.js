@@ -16,9 +16,11 @@ export default function Profile() {
         getProfile() 
     }, [])
 
+
     async function getProfile() {
         try {
             setLoading(true)
+
             const user = supabase.auth.user()
             let { data, error, status } = await supabase
                 .from('profiles')
@@ -59,6 +61,11 @@ export default function Profile() {
             }
             if (username.trim().length < 4 || username.trim().length > 12) {
                 alert('username min 4 and max 12 characters')
+                return
+            }
+            var expr = /^[a-zA-Z0-9_]{4,12}$/;
+            if (!expr.test(username)) {
+                alert('Only Character, number and _ allowed')
                 return
             }
 

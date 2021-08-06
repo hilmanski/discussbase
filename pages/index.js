@@ -3,6 +3,7 @@ import { supabase } from '../utils/supabaseClient'
 import Auth from '../components/Auth'
 import Layout from '../components/Layout'
 import Image from 'next/image'
+import Link from 'next/link'
 
 export default function Home() {
   const [session, setSession] = useState(null)
@@ -26,6 +27,7 @@ export default function Home() {
         <h2 className='is-size-4 mb-5'>
           Create your discussion platform completely free, <br/>
           Using SEVEN stack (Supabase, Vercel and Next.js). 
+          Source code <Link href='https://github.com/hilmanski/discussbase'><a>available here</a></Link>
         </h2>
 
         <div className='columns mt-2'>

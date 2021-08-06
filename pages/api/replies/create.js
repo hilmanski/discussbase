@@ -19,7 +19,8 @@ const createReply = async(req, res) => {
         
         let reply = data[0]
         if(!error) {
-            const { data: user, error } = await supabase
+            //Get user related info
+            const { data: user, error: errorProfile } = await supabase
                                       .from('profiles')
                                       .select('id, username, avatar_url')
                                       .eq('id', user_id)
@@ -27,6 +28,7 @@ const createReply = async(req, res) => {
 
             reply['commenter_id'] = user.id
             reply['commenter_username'] = user.username
+            reply['commenter_avatar_url'] = user.avatar_url
         }
         
         res.status(200).json({ status: 'success', reply: reply })

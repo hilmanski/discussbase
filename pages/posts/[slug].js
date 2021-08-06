@@ -56,12 +56,12 @@ export default function Post({post}) {
        </Head>
             <div className="columns">
             
-            <div className="column">
+            <div className="column is-2">
                 <div className="is-flex-mobile">
-                <Avatar username={post.owner.username} avatar_url={post.owner.avatar_url} size="48"/>
+                <Avatar username={post.owner.username} avatar_url={post.owner.avatar_url} size="32"/>
                 <div>
-                <p> <Link href={'/user/' + post.owner.username}><a className='has-text-dark'>@{post.owner.username} </a></Link> 
-                      posted <TimeAgo date={post.created_at} /></p>
+                <p><small> <Link href={'/user/' + post.owner.username}><a className='has-text-dark'>@{post.owner.username} </a></Link> 
+                                posted <TimeAgo date={post.created_at} /></small></p>
                 <p> <Link href={'/posts/tag/' + post.tag}><a className='tag is-link is-light'>{post.tag}</a></Link></p>
                 </div>
                 </div>
@@ -75,7 +75,7 @@ export default function Post({post}) {
             </div>
 
 
-            <div className="column is-four-fifths">
+            <div className="column">
                 <h1 className='is-size-3 mb-2'>{capitalize(post.title)}</h1>
                 <div className='mb-4'>
                     <ReactMarkdown>{post.body}</ReactMarkdown>

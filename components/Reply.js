@@ -182,16 +182,16 @@ export default function Reply({post_id, replies}) {
                         }
                     }
 
-                    return <div key={index} className='columns reply_box mb-3'>
-                            <div className='column is-1'>
+                    return <div key={index} className='columns is-mobile reply_box mb-3'>
+                            <div className='column is-narrow'>
                                 <Avatar username={reply.commenter.username} avatar_url={reply.commenter.avatar_url} size='48' />
                             </div>
                             <div className='column'>
-                            <p className='reply_text' data-id={reply.id} data-index={index}>
-                                <ReactMarkdown>{reply.body}</ReactMarkdown>
-                                </p>
-                            <small className='has-text-grey'><Link href={'/user/' + reply.commenter.username}><a className='has-text-grey'>@{reply.commenter.username} </a></Link>
-                             replied <TimeAgo date={reply.created_at} /> </small>
+                                <p className='reply_text' data-id={reply.id} data-index={index}>
+                                    <ReactMarkdown>{reply.body}</ReactMarkdown>
+                                    </p>
+                                <small className='has-text-grey'><Link href={'/user/' + reply.commenter.username}><a className='has-text-grey'>@{reply.commenter.username} </a></Link>
+                                replied <TimeAgo date={reply.created_at} /> </small>
 
                                 {commentOwner &&
                                     <div>

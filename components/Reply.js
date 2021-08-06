@@ -6,7 +6,6 @@ import isProfileExists from '../utils/isProfileExists';
 import Avatar from './Avatar';
 import Link from 'next/link';
 import ReactMarkdown from 'react-markdown'
-import marked from 'marked';
 
 export default function Reply({post_id, replies}) {
     const [blockMsg, setBlockMsg] = useState('')
@@ -58,7 +57,15 @@ export default function Reply({post_id, replies}) {
             .then((data) => {
                 if(editMode == true){
                     setEditMode(false)
-                    document.querySelector(`.reply_text[data-id='${selectedReply}']`).innerHTML = marked(data.reply.body)
+                    const selectedIndex = document.querySelector(`.reply_text[data-id='${selectedReply}']`).getAttribute('data-index')
+                    
+                    const newReplies = replyList.map((reply, index) => {
+                        if (selectedIndex == index) {
+                            reply.body = data.reply.body
+                        }
+                        return reply
+                    })
+                    setReplyList(newReplies)
                 } 
                 else {
                     const newReply = {
@@ -180,7 +187,7 @@ export default function Reply({post_id, replies}) {
                                 <Avatar username={reply.commenter.username} avatar_url={reply.commenter.avatar_url} size='48' />
                             </div>
                             <div className='column'>
-                                <p className='reply_text' data-id={reply.id}>
+                            <p className='reply_text' data-id={reply.id} data-index={index}>
                                 <ReactMarkdown>{reply.body}</ReactMarkdown>
                                 </p>
                             <small className='has-text-grey'><Link href={'/user/' + reply.commenter.username}><a className='has-text-grey'>@{reply.commenter.username} </a></Link>

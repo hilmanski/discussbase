@@ -14,7 +14,7 @@ export default function Home() {
       </h2>
 
       <div>
-        <Link href='/forum'><button className="button is-outlined mr-1">Try It</button></Link>
+        <Link href='/posts'><button className="button is-outlined mr-1">Try It</button></Link>
         <Link href='https://docs-discussbase.vercel.app/'><button className="button is-outlined">Read Documentation</button></Link>
       </div>
 

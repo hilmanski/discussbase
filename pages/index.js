@@ -9,13 +9,13 @@ export default function Home() {
         <h1 className='is-size-2 is-size-4-mobile'>Discussbase</h1>
         <h2 className='is-size-4 mb-5'>An open-source forum <br></br>
           Create your discussion platform and deploy it completely free,
-        Using "Seven-stack" (Supabase, Vercel and Next.js).
+        Using &ldquo;Seven-stack&rdquo; (Supabase, Vercel and Next.js).
         Simplicity first. Focus on your discussion
       </h2>
 
       <div>
-        <Link href='https://github.com/hilmanski/discussbase'><button class="button is-outlined mr-1">Source Code</button></Link>
-        <Link href='https://docs-discussbase.vercel.app/'><button class="button is-outlined">Read Documentation</button></Link>
+        <Link href='https://github.com/hilmanski/discussbase'><button className="button is-outlined mr-1">Source Code</button></Link>
+        <Link href='https://docs-discussbase.vercel.app/'><button className="button is-outlined">Read Documentation</button></Link>
       </div>
 
         <div className='columns mt-6'>

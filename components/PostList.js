@@ -7,11 +7,12 @@ import capitalize from '../utils/capitalize';
 import Avatar from './Avatar';
 import getCategories from '../utils/getCategories';
 
-export default function PostList({ posts, totalPosts, category = null }) {
+export default function PostList({ posts, totalPosts, tag = null }) {
     const [pathName, setPathName] = useState(null)
     const perPage = 15   
     const totalPage = Math.ceil(totalPosts/perPage)
     const categories = getCategories()
+    const category = categories.find(item => item.key === tag);
     
     useEffect(() => {
         // component is mounted and window is available

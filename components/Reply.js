@@ -46,7 +46,7 @@ export default function Reply({post_id, replies}) {
             url_endpoint = '/api/replies/update'
             formData['reply_id'] = selectedReply
         }
-
+        
         fetch(url_endpoint, {
             method: method,
             headers: {

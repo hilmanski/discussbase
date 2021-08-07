@@ -1,14 +1,19 @@
-import { route } from 'next/dist/next-server/server/router';
+import { useState, useEffect } from 'react'
 import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router'
-import { useState } from 'react';
 import { supabase } from '../utils/supabaseClient'
 
 export default function Layout({ children }) {
     const router = useRouter()
-    const user_session = supabase.auth.session()
+    const [session, setSession] = useState(supabase.auth.session())
     const [isActive, setisActive] = useState(false)
+
+    useEffect(() => {
+        supabase.auth.onAuthStateChange((_event, session) => {
+            setSession(session)
+        })
+    }, [])
 
     return (
         <>
@@ -52,7 +57,7 @@ export default function Layout({ children }) {
                             </Link>
 
 
-                            {user_session
+                            {session
                                 ? <>
                                     <Link href='/profile'><a className="navbar-item"> Profile </a></Link>
                                     <a className="navbar-item" onClick={() => {
@@ -60,7 +65,7 @@ export default function Layout({ children }) {
                                         router.push('/')
                                     }}> Log Out </a>
                                 </>
-                                : <Link href='/'><a className={'navbar-item'}>Login</a></Link>
+                                : <Link href='/login'><a className={'navbar-item'}>Login</a></Link>
                             }
                         </div>
                     </div>

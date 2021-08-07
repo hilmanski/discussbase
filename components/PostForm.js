@@ -16,13 +16,13 @@ export default function Form({slug}) {
         (async () => {
             //Redirect if not logged In
             if (user_session == null) {
-                window.location.href = '/'
+                window.location.href = '/login'
             }
 
             const profileExists = await isProfileExists()
             if (!profileExists) {
                 alert('Create username first')
-                window.location.href = '/'
+                window.location.href = '/login'
             }
         })();
     }, [user_session])

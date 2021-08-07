@@ -1,28 +1,11 @@
-import { useState, useEffect } from 'react'
-import { supabase } from '../utils/supabaseClient'
-import Auth from '../components/Auth'
 import Layout from '../components/Layout'
 import Image from 'next/image'
 import Link from 'next/link'
 
 export default function Home() {
-  const [session, setSession] = useState(null)
-
-  useEffect(() => {
-    setSession(supabase.auth.session())
-
-    supabase.auth.onAuthStateChange((_event, session) => {
-      setSession(session)
-    })
-  }, [])
 
   return (
     <Layout>
-    <div className="container">
-
-        {!session && <Auth />}
-        <br/>
-
         <h1 className='is-size-2 is-size-4-mobile'>Open Source forum</h1>
         <h2 className='is-size-4 mb-5'>
           Create your discussion platform completely free,
@@ -31,7 +14,7 @@ export default function Home() {
           Read the doc <Link href='https://docs-discussbase.vercel.app/'><a>here</a></Link>
         </h2>
 
-        <div className='columns mt-2'>
+        <div className='columns mt-4'>
           <div className='column'>
             <figure className='image is-64x64'>
               <Image width='64' height='64' className='is-rounded' src='https://pbs.twimg.com/profile_images/1397471927132844033/jN-wuufb_400x400.jpg' alt='supabase logo'/>
@@ -56,8 +39,6 @@ export default function Home() {
             <p>Next.js gives you the best developer experience with all the features you need for production.</p>
           </div>
         </div>
-
-    </div>
     </Layout>
   )
 }

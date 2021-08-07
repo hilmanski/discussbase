@@ -18,10 +18,22 @@ export default function Auth() {
         }
     }
 
+    async function signInWithTwitter() {
+        const { user, session, error } = await supabase.auth.signIn({
+            provider: 'twitter'
+        });
+    }
+
     return (
         <div>
+            <div className='mb-4'>
+                <p className="is-size-5 mb-1">Social Login</p>
+                <button className='button is-info' onClick={signInWithTwitter}>Sign in with Twitter</button>
+            </div>
+
+
             <div>
-                <p className="description is-size-4">Sign in via magic link with your email</p>
+                <p className="is-size-5 mb-1">Or via email</p>
                 <div>
                     <input
                         className="input mb-2"

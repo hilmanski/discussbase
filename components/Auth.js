@@ -18,9 +18,9 @@ export default function Auth() {
         }
     }
 
-    async function signInWithTwitter() {
+    async function signInWithSocial(provider) {
         const { user, session, error } = await supabase.auth.signIn({
-            provider: 'twitter'
+            provider: provider
         });
     }
 
@@ -28,7 +28,9 @@ export default function Auth() {
         <div>
             <div className='mb-4'>
                 <p className="is-size-5 mb-1">Social Login</p>
-                <button className='button is-info' onClick={signInWithTwitter}>Sign in with Twitter</button>
+                <button className='button is-info' onClick={() => signInWithSocial('twitter')}>Sign in with Twitter</button>
+                &nbsp;
+                <button className='button is-dark' onClick={() => signInWithSocial('github')}>Sign in with Github</button>
             </div>
 
 

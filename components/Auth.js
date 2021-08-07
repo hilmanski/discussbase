@@ -25,12 +25,13 @@ export default function Auth() {
     }
 
     return (
-        <div>
+        <div className="columns">
+            <div className="column is-half is-offset-one-quarter">
+            <h3 className='title'>Join the discussion</h3>
             <div className='mb-4'>
                 <p className="is-size-5 mb-1">Social Login</p>
-                <button className='button is-info' onClick={() => signInWithSocial('twitter')}>Sign in with Twitter</button>
-                &nbsp;
-                <button className='button is-dark' onClick={() => signInWithSocial('github')}>Sign in with Github</button>
+                <button className='button is-fullwidth is-info mb-1' onClick={() => signInWithSocial('twitter')}>Sign in with Twitter</button>
+                <button className='button is-fullwidth is-dark' onClick={() => signInWithSocial('github')}>Sign in with Github</button>
             </div>
 
 
@@ -51,13 +52,14 @@ export default function Auth() {
                             e.preventDefault()
                             handleLogin(email)
                         }}
-                        className="button is-primary"
+                            className="button is-primary is-fullwidth"
                         disabled={loading}
                     >
                         <span>{loading ? 'Loading' : 'Send magic link'}</span>
                     </button>
                 </div>
             </div>
+        </div>
         </div>
     )
 }

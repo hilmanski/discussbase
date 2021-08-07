@@ -8,7 +8,7 @@ export default function Home() {
     <Layout>
         <h1 className='is-size-2 is-size-4-mobile'>Open Source forum</h1>
         <h2 className='is-size-4 mb-5'>
-          Create your discussion platform completely free,
+          Create your discussion platform and deploy it completely free,
           Using SEVEN stack (Supabase, Vercel and Next.js).
           Source code <Link href='https://github.com/hilmanski/discussbase'><a>available here</a></Link>.
           Read the doc <Link href='https://docs-discussbase.vercel.app/'><a>here</a></Link>

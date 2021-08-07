@@ -6,13 +6,13 @@ export default function Home() {
 
   return (
     <Layout>
-        <h1 className='is-size-2 is-size-4-mobile'>Open Source forum</h1>
-        <h2 className='is-size-4 mb-5'>
+        <h1 className='is-size-2 is-size-4-mobile'>Discussbase</h1>
+        <h2 className='is-size-4 mb-5'>An open Source forum <br></br>
           Create your discussion platform and deploy it completely free,
           Using SEVEN stack (Supabase, Vercel and Next.js).
           Source code <Link href='https://github.com/hilmanski/discussbase'><a>available here</a></Link>.
           Read the doc <Link href='https://docs-discussbase.vercel.app/'><a>here</a></Link>
-        </h2>
+      </h2>
 
         <div className='columns mt-4'>
           <div className='column'>

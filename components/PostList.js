@@ -7,7 +7,7 @@ import capitalize from '../utils/capitalize';
 import Avatar from './Avatar';
 import getCategories from '../utils/getCategories';
 
-export default function PostList({ posts, totalPosts, tag = null }) {
+export default function PostList({ posts, totalPosts, category = null }) {
     const [pathName, setPathName] = useState(null)
     const perPage = 15   
     const totalPage = Math.ceil(totalPosts/perPage)
@@ -18,17 +18,16 @@ export default function PostList({ posts, totalPosts, tag = null }) {
         setPathName(window.location.pathname)
     }, []);
 
-
     return (
         <Layout>
             <Head>
-                <title>All Posts - {tag} </title>
+                <title>All Posts {category && category.name} </title>
             </Head>
             <div>
                 <section className="my-5">
-                    <h1 className="title">Post {tag}</h1>
+                    <h1 className="title">Post {category && category.name}</h1>
                     <h2 className="subtitle">
-                        All Posts 
+                        {category ? category.desc : 'Everything in this forum' }
                     </h2>
                 </section>
 

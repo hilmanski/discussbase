@@ -61,7 +61,7 @@ export default function Post({post}) {
                     <div className="mr-2">
                         <Avatar username={post.owner.username} avatar_url={post.owner.avatar_url} size="32"/>
                     </div>
-                    <p><small> <Link href={'/user/' + post.owner.username}><a className='has-text-dark'>@{post.owner.username} </a></Link> 
+                    <p className='mr-1'><small> <Link href={'/user/' + post.owner.username}><a className='has-text-dark'>@{post.owner.username} </a></Link> 
                                     posted <TimeAgo date={post.created_at} /></small></p>
                     <p> <Link href={'/posts/tag/' + post.tag}><a className='tag is-link is-light'>{post.tag}</a></Link></p>
                 </div>

@@ -14,7 +14,7 @@ export default function Home() {
       </h2>
 
       <div>
-        <Link href='https://github.com/hilmanski/discussbase'><button className="button is-outlined mr-1">Source Code</button></Link>
+        <Link href='/forum'><button className="button is-outlined mr-1">Try It</button></Link>
         <Link href='https://docs-discussbase.vercel.app/'><button className="button is-outlined">Read Documentation</button></Link>
       </div>
 
@@ -43,6 +43,9 @@ export default function Home() {
             <p>Next.js gives you the best developer experience with all the features you need for production.</p>
           </div>
         </div>
+
+      <a className="github-button" href="https://github.com/hilmanski/discussbase" data-color-scheme="no-preference: dark; light: dark; dark: dark_dimmed;" data-size="large" data-show-count="true" aria-label="Star hilmanski/discussbase on GitHub">Star on Github</a>
+      <script async defer src="https://buttons.github.io/buttons.js"></script>
     </Layout>
   )
 }

@@ -58,18 +58,18 @@ export default function Post({post}) {
             
             <div className="column is-2">
                 <div className="is-flex-mobile">
-                <Avatar username={post.owner.username} avatar_url={post.owner.avatar_url} size="32"/>
-                <div>
-                <p><small> <Link href={'/user/' + post.owner.username}><a className='has-text-dark'>@{post.owner.username} </a></Link> 
-                                posted <TimeAgo date={post.created_at} /></small></p>
-                <p> <Link href={'/posts/tag/' + post.tag}><a className='tag is-link is-light'>{post.tag}</a></Link></p>
-                </div>
+                    <div className="mr-2">
+                        <Avatar username={post.owner.username} avatar_url={post.owner.avatar_url} size="32"/>
+                    </div>
+                    <p><small> <Link href={'/user/' + post.owner.username}><a className='has-text-dark'>@{post.owner.username} </a></Link> 
+                                    posted <TimeAgo date={post.created_at} /></small></p>
+                    <p> <Link href={'/posts/tag/' + post.tag}><a className='tag is-link is-light'>{post.tag}</a></Link></p>
                 </div>
 
                 {owner &&
                     <div className='mt-2'>
-                        <Link href={'/posts/create?post=' + post.slug}><a className='is-block'> Edit </a></Link>
-                        <a className='is-block' onClick={confirmDelete}>Delete</a>
+                        <Link href={'/posts/create?post=' + post.slug}><a className=''> Edit </a></Link>&nbsp;
+                        <a className='' onClick={confirmDelete}>Delete</a>
                     </div>
                 }
             </div>

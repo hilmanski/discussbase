@@ -72,6 +72,10 @@ export default function Reply({post_id, replies}) {
             setReplyList(oldReplies => [newReply, ...oldReplies])
         }
         
+
+        //empty textarea
+        setValue('body', '')
+        
         fetch(url_endpoint, {
             method: method,
             headers: {
@@ -101,9 +105,6 @@ export default function Reply({post_id, replies}) {
                         return updatedReplies;
                     });
                 }
-
-                //empty textarea
-                setValue('body', '')
             })
             .catch((error) => {
                 console.error('Error:', error);

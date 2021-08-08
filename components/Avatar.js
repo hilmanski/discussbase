@@ -31,7 +31,6 @@ export default function Avatar({username, avatar_url, size=64}) {
 
     return (
         <>
-        { avatarUrl ? 'yes avatar' : 'no avatar ' }
         <figure className={`image is-${size}x${size}`}>
             { avatarUrl
                 ? <Image loader={customImgLoader} className='is-rounded' alt="Avatar" width={size} height={size} src={avatarUrl} />

@@ -11,15 +11,14 @@ export default function Reply({post_id, replies}) {
     const [blockMsg, setBlockMsg] = useState('')
     const [selectedReply, setSelectedReply] = useState('')
     const [editMode, setEditMode] = useState(false)
-    const [replyList, setReplyList] = useState([])
+    const [replyList, setReplyList] = useState(replies)
     const { handleSubmit, register, setValue, formState: { errors } } = useForm();
     
     const user_session = supabase.auth.session()
 
     useEffect(() => {
         checkAuthUser()
-        setReplyList(replies)
-    }, [replies])
+    }, [])
 
     async function checkAuthUser() {
         const profileExists = await isProfileExists()
@@ -41,10 +40,36 @@ export default function Reply({post_id, replies}) {
         formData['access_token'] = user_session.access_token
         formData['post_id'] = post_id
 
+        //Show new change directly
+        let parsedUserData = JSON.parse(localStorage.getItem('userData'));
+        let newReply = {
+            id: 'tempId',
+            body: formData['body'],
+            created_at: new Date(),
+            commenter: {
+                id: parsedUserData.id,
+                username: parsedUserData.username,
+                avatar_url: parsedUserData.avatar_url,
+            }
+        }
+
         if(editMode == true) {
             method = 'PUT'
             url_endpoint = '/api/replies/update'
             formData['reply_id'] = selectedReply
+
+            //Live response
+            const selectedIndex = document.querySelector(`.reply_text[data-id='${selectedReply}']`).getAttribute('data-index')
+
+            const updatedReplies = replyList.map((reply, index) => {
+                if (selectedIndex == index) {
+                    reply.body = formData['body']
+                }
+                return reply
+            })
+            setReplyList(updatedReplies)
+        } else {
+            setReplyList(oldReplies => [newReply, ...oldReplies])
         }
         
         fetch(url_endpoint, {
@@ -54,31 +79,27 @@ export default function Reply({post_id, replies}) {
             },
             body: JSON.stringify(formData),
         }).then(response => response.json())
-            .then((data) => {
+            .then(async (data) => {
                 if(editMode == true){
                     setEditMode(false)
-                    const selectedIndex = document.querySelector(`.reply_text[data-id='${selectedReply}']`).getAttribute('data-index')
-                    
-                    const newReplies = replyList.map((reply, index) => {
-                        if (selectedIndex == index) {
-                            reply.body = data.reply.body
-                        }
-                        return reply
-                    })
-                    setReplyList(newReplies)
+                    //do nothing here?
                 } 
                 else {
-                    const newReply = {
-                                id: data.reply.id,
-                                body: data.reply.body,
-                                created_at: data.reply.created_at,
-                                commenter: {
-                                    id: data.reply.commenter_id,
-                                    username: data.reply.commenter_username,
-                                    avatar_url: data.reply.commenter_avatar_url,
-                                } 
+                    //newly added Reply, maybe change based on order
+                    const newReplyIndex = 0 
+                    //only change the id to data.reply.id,
+                    //callback to get newest state
+                    setReplyList((state) => {
+                        let updatedReplies = []
+                        state.map((reply, index) => {
+                            if (newReplyIndex == index) {
+                                reply.id = data.reply.id
                             }
-                    setReplyList(oldReplies => [newReply, ...oldReplies])
+                            updatedReplies.push(reply)
+                        })
+
+                        return updatedReplies;
+                    });
                 }
 
                 //empty textarea
@@ -92,7 +113,8 @@ export default function Reply({post_id, replies}) {
     async function editComment(e){
         e.preventDefault();
 
-        const reply_id = e.currentTarget.getAttribute("data-edit")
+        const reply_index = e.currentTarget.getAttribute("data-index")
+        const reply_id = replyList[reply_index].id
         const replyTextarea = document.getElementsByTagName('textarea')[0]
 
         let { data, error } = await supabase
@@ -115,7 +137,8 @@ export default function Reply({post_id, replies}) {
     async function confirmDelete(e) {
         e.preventDefault();
         const result = confirm('Are you sure you want to delete this reply?')
-        const reply_id = e.currentTarget.getAttribute("data-del")
+        const reply_index = e.currentTarget.getAttribute("data-index")
+        const reply_id = replyList[reply_index].id
         
         if(result == true) {
             let formData = {
@@ -131,8 +154,8 @@ export default function Reply({post_id, replies}) {
                 body: JSON.stringify(formData),
             }).then(response => response.json())
                 .then(data => {
-                    //delete reply visually
-                    document.querySelector(`[data-del='${reply_id}']`).closest('.reply_box').remove()
+                    const freshReplies = replyList.filter((item, index) => index != reply_index )
+                    setReplyList(freshReplies)
                 })
                 .catch((error) => {
                     console.error('Error:', error);
@@ -177,8 +200,10 @@ export default function Reply({post_id, replies}) {
                     let commentOwner = false
 
                     if (user_session) {
-                        if (user_session.user.id == reply.commenter.id) {
-                            commentOwner = true
+                        if (user_session.user) {
+                            if (user_session.user.id == reply.commenter.id) {
+                                commentOwner = true
+                            }
                         }
                     }
 
@@ -195,8 +220,8 @@ export default function Reply({post_id, replies}) {
 
                                 {commentOwner &&
                                     <div>
-                                        <a onClick={editComment} data-edit={reply.id}>Edit</a> &nbsp;
-                                        <a onClick={confirmDelete} data-del={reply.id}>Delete</a>
+                                        <a onClick={editComment} data-index={index}>Edit</a> &nbsp;
+                                        <a onClick={confirmDelete} data-index={index}>Delete</a>
                                     </div>
                                 }
                             </div>

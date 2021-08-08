@@ -15,11 +15,37 @@ export default function Post({post}) {
     
     useEffect(() => {
         if (user_session) {
-            if (user_session.user.id == post.owner.id) {
-                setOwner(true)
+            if(user_session.user) {
+                fetchUserData()
+                if (user_session.user.id == post.owner.id) {
+                    setOwner(true)
+                }
             }
         }
     }, [user_session, post.owner.id])
+
+    async function fetchUserData() {
+        //For faster respond on reply, save it on localstorage
+        
+        //check if already in localstorage no need
+        const localUserData = localStorage.getItem('userData')
+        if(localUserData) {
+            return
+        }
+
+        let { data, error } = await supabase
+            .from('profiles')
+            .select(`id, username, avatar_url`)
+            .eq('id', user_session.user.id)
+            .single()
+
+        if(!error) {
+            const userData = {'id' : data.id, 'username': data.username, 'avatar_url': data.avatar_url}
+            localStorage.setItem('userData', JSON.stringify(userData))
+        }
+    }
+
+
 
     async function confirmDelete(e) {
         e.preventDefault();

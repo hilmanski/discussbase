@@ -22,18 +22,6 @@ const createReply = async(req, res) => {
             const { error: errsetTimestamp } = await supabase
                 .rpc('set_timestamp', { post_id })
             console.log(errsetTimestamp)
-
-            //Maybe put all of this in one RPC function
-            //Get user related info
-            const { data: user, error: errorProfile } = await supabase
-                                    .from('profiles')
-                                    .select('id, username, avatar_url')
-                                    .eq('id', user_id)
-                                    .single()
-
-            reply['commenter_id'] = user.id
-            reply['commenter_username'] = user.username
-            reply['commenter_avatar_url'] = user.avatar_url
         }
         
         res.status(200).json({ status: 'success', reply: reply })

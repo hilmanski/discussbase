@@ -69,9 +69,14 @@ export default function Reply({post_id, replies}) {
             })
             setReplyList(updatedReplies)
         } else {
-            setReplyList(oldReplies => [newReply, ...oldReplies])
+            setReplyList(oldReplies => [...oldReplies, newReply])
+
+            //scroll to new reply
+            const el = document.querySelector(`#reply-${ replyList.length }`);
+            el.scrollIntoView({
+                behavior: 'smooth'
+            });
         }
-        
 
         //empty textarea
         setValue('body', '')
@@ -89,14 +94,12 @@ export default function Reply({post_id, replies}) {
                     //do nothing here?
                 } 
                 else {
-                    //newly added Reply, maybe change based on order
-                    const newReplyIndex = 0 
-                    //only change the id to data.reply.id,
                     //callback to get newest state
                     setReplyList((state) => {
                         let updatedReplies = []
                         state.map((reply, index) => {
-                            if (newReplyIndex == index) {
+                            //update id of newest reply added
+                            if ((state.length - 1) == index) {
                                 reply.id = data.reply.id
                             }
                             updatedReplies.push(reply)
@@ -208,7 +211,7 @@ export default function Reply({post_id, replies}) {
                         }
                     }
 
-                    return <div key={index} className='columns is-mobile reply_box mb-3'>
+                    return <div key={index} className='columns is-mobile reply_box mb-3' id={'reply-' +index}>
                             <div className='column is-narrow'>
                                 <Avatar username={reply.commenter.username} avatar_url={reply.commenter.avatar_url} size='48' />
                             </div>

@@ -25,15 +25,11 @@ export default function Avatar({username, avatar_url, size=64}) {
         }
     }
 
-    const customImgLoader = ({ src, width }) => {
-        return `${src}`
-    }
-
     return (
         <>
         <figure className={`image is-${size}x${size}`}>
             { avatarUrl
-                ? <Image loader={customImgLoader} className='is-rounded' alt="Avatar" width={size} height={size} src={avatarUrl} />
+                ? <Image unoptimized="false" className='is-rounded' alt="Avatar" width={size} height={size} src={avatarUrl} />
                 : <Image className='is-rounded' alt="Avatar" width={size} height={size} 
                             src={'https://ui-avatars.com/api/?name='+username} />
             }

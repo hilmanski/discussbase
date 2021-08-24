@@ -91,7 +91,6 @@ export default function Reply({post_id, replies}) {
             .then(async (data) => {
                 if(editMode == true){
                     setEditMode(false)
-                    //do nothing here?
                 } 
                 else {
                     //callback to get newest state

@@ -63,13 +63,11 @@ export default function Layout({ children }) {
                             <Link href="/posts">
                                 <a className={'navbar-item'}>Forum</a>
                             </Link>
-                            <Link href="/posts/create">
-                                <a className={'navbar-item'}>New+</a>
-                            </Link>
 
 
                             {session
                                 ? <>
+                                    <Link href="/posts/create"><a className={'navbar-item'}>New+</a></Link>
                                     <Link href='/profile'><a className="navbar-item"> Profile </a></Link>
                                     <a className="navbar-item" onClick={() => {
                                         supabase.auth.signOut()

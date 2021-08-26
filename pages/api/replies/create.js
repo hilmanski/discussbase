@@ -1,4 +1,5 @@
 import { supabase } from '../../../utils/supabaseClient'
+import { supabaseAdmin } from '../../../utils/supabaseClientAdmin'
 import jwt_decode from "jwt-decode";
 
 const createReply = async(req, res) => {
@@ -19,8 +20,8 @@ const createReply = async(req, res) => {
         
         let reply = data[0]
         if(!error) {
-            const { error: errsetTimestamp } = await supabase
-                .rpc('set_timestamp', { post_id })
+            const { error: errsetTimestamp } = await supabaseAdmin
+                                                    .rpc('set_timestamp', { post_id })
             console.log(errsetTimestamp)
         }
         
